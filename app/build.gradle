@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'  // доступ по id
+    //id 'kotlin-android-extensions'  // доступ по id
 }
 apply plugin: 'kotlin-kapt'
 android {
@@ -22,6 +22,7 @@ android {
     buildFeatures{
         viewBinding = true
     }
+
 
     buildTypes {
         release {
