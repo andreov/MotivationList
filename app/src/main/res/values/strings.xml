@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Motivation List</string>
+    <string name="Autor">Беатрис Лопес</string>
+    <string name="date">22.02.2021</string>
+    <string name="content">Мотивация - это внутреннее состояние, которое активизирует, направляет и поддерживает поведение, направленное на достижение определённых целей. Таким образом, мотивация является причиной поведения и способностью человека деятельно удовлетворять свои потребности → https://zen.yandex.ru/media/cognifit/motivaciia-vidy-prepiatstviia-i-poleznye-sovety-dlia-dostijeniia-celei-5c891d07efadc400b227cfef?utm_source=serp</string>
 </resources>

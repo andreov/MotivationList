@@ -10,8 +10,9 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="12dp"
         android:outlineProvider="none"
+        app:cardCornerRadius="12dp"
         app:cardBackgroundColor="@color/cardView"
         >
 
@@ -29,8 +30,8 @@
                 android:layout_marginBottom="8dp"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:text="AvtorText"
-                android:textSize="12sp"
+                android:text="@string/Autor"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/published"
                 app:layout_constraintStart_toStartOf="parent"
@@ -41,19 +42,20 @@
                 android:id="@+id/published"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="publishedText"
-                android:textSize="12sp"
-                android:textStyle="bold"
+                android:text="@string/date"
+                android:textSize="16sp"
+                android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="@+id/barrierTop"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/author" />
+                app:layout_constraintTop_toBottomOf="@id/author"
+                app:layout_constraintBottom_toTopOf="@id/barrierTop"/>
 
-            <View style="@style/Divider.Horizontal"
-                android:id="@+id/line1"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@id/published"
-                app:layout_constraintBottom_toTopOf="@id/barrierTop"
-                app:layout_constraintStart_toStartOf="parent"/>
+<!--            <View style="@style/Divider.Horizontal"-->
+<!--                android:id="@+id/line1"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/published"-->
+<!--                app:layout_constraintBottom_toTopOf="@id/barrierTop"-->
+<!--                app:layout_constraintStart_toStartOf="parent"/>-->
 
 
 
@@ -62,53 +64,59 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:barrierDirection="bottom"
-                app:constraint_referenced_ids="author,published,line1"
-                app:layout_constraintTop_toBottomOf="@id/line1"
+                app:constraint_referenced_ids="author,published"
+                app:layout_constraintTop_toBottomOf="@id/published"
+                app:layout_constraintBottom_toTopOf="@id/image"
 
-                tools:layout_editor_absoluteX="16dp" />
+                 />
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="image Idea"
+                tools:visibility="visible"
+                app:srcCompat="@drawable/scale_1200"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/content"
+                app:layout_constraintTop_toBottomOf="@id/barrierTop" />
 
             <TextView
                 android:id="@+id/content"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:autoLink="web"
-                android:text="contentText"
+                android:text="@string/content"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@id/barrierBottom"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/barrierTop" />
-
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:contentDescription="image Idea"
-                android:visibility="visible"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/content" />
-
-            <TextView
-                android:id="@+id/urlText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:hint="url text"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/barrierBottom"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/image" />
 
-            <View style="@style/Divider.Horizontal"
-                android:id="@+id/line2"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@id/urlText"
-                app:layout_constraintBottom_toTopOf="@id/barrierBottom"
-                app:layout_constraintStart_toStartOf="parent"/>
+
+
+<!--            <TextView-->
+<!--                android:id="@+id/urlText"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:layout_marginBottom="16dp"-->
+<!--                android:hint="url text"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textStyle="normal"-->
+<!--                app:layout_constraintBottom_toTopOf="@id/barrierBottom"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/image" />-->
+
+<!--            <View style="@style/Divider.Horizontal"-->
+<!--                android:id="@+id/line2"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/urlText"-->
+<!--                app:layout_constraintBottom_toTopOf="@id/barrierBottom"-->
+<!--                app:layout_constraintStart_toStartOf="parent"/>-->
 
 
             <androidx.constraintlayout.widget.Barrier
@@ -117,13 +125,13 @@
                 android:layout_height="wrap_content"
                 android:visibility="visible"
                 app:barrierDirection="bottom"
-                app:constraint_referenced_ids="barrierTop,published,content,image,urlText"
+                app:constraint_referenced_ids="author,published,barrierTop,content,image"
                 app:layout_constraintTop_toBottomOf="@id/content"
                 tools:layout_editor_absoluteY="236dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/imageLike"
-                style="@style/Widget.AppTheme.Text"
+                style="@style/Widget.AppTheme.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -136,13 +144,13 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/imageDisLike"
-                style="@style/Widget.AppTheme.Text"
+                style="@style/Widget.AppTheme.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="20dp"
                 android:checkable="true"
-                android:text="15"
+                android:text=" "
                 app:icon="@drawable/ic_baseline_thumb_down_24"
                 app:layout_constraintStart_toEndOf="@id/imageLike"
                 app:layout_constraintTop_toBottomOf="@id/barrierBottom" />
@@ -150,7 +158,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/imageShare"
-                style="@style/Widget.AppTheme.Text"
+                style="@style/Widget.AppTheme.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
