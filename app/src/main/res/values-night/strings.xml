@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="Autor">Беатрис Лопес</string>
+    <string name="add_content">add_content</string>
+    <string name="url_content">url content</string>
+    <string name="urlContent">https://zen.yandex.ru/media/cognifit/motivaciia-vidy-prepiatstviia-i-poleznye-sovety-dlia-dostijeniia-celei-5c891d07efadc400b227cfef?utm_source=serp</string>
 </resources>

@@ -1,11 +1,13 @@
-package ru.netology.motivationlist
+package ru.netology.motivationlist.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import ru.netology.motivationlist.R
 
-class MainActivity : AppCompatActivity() {
+class AppActivity : AppCompatActivity(R.layout.activity_app) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
     }
+
+
 }

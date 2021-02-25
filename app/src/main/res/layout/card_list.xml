@@ -66,50 +66,56 @@
                 app:barrierDirection="bottom"
                 app:constraint_referenced_ids="author,published"
                 app:layout_constraintTop_toBottomOf="@id/published"
-                app:layout_constraintBottom_toTopOf="@id/image"
-
-                 />
+                app:layout_constraintBottom_toTopOf="@id/image" />
 
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="match_parent"
                 android:layout_height="230dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="4dp"
                 android:contentDescription="image Idea"
-                tools:visibility="visible"
-                app:srcCompat="@drawable/scale_1200"
-                app:layout_constraintStart_toStartOf="parent"
+                android:scaleType="fitStart"
                 app:layout_constraintBottom_toTopOf="@id/content"
-                app:layout_constraintTop_toBottomOf="@id/barrierTop" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/barrierTop"
+                app:srcCompat="@drawable/scale_1200"
+                tools:visibility="visible" />
 
             <TextView
                 android:id="@+id/content"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:autoLink="web"
+                android:maxLines="3"
+                android:maxLength="150"
+                android:ellipsize="end"
                 android:text="@string/content"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@id/barrierBottom"
+                app:layout_constraintBottom_toTopOf="@id/urlContent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/image" />
 
 
 
-<!--            <TextView-->
-<!--                android:id="@+id/urlText"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                android:layout_marginBottom="16dp"-->
-<!--                android:hint="url text"-->
-<!--                android:textSize="16sp"-->
-<!--                android:textStyle="normal"-->
-<!--                app:layout_constraintBottom_toTopOf="@id/barrierBottom"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@id/image" />-->
+            <TextView
+                android:id="@+id/urlContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:autoLink="web"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="@string/urlContent"
+                android:hint="@string/url_content"
+                android:textSize="12sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toTopOf="@id/barrierBottom"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/content" />
 
 <!--            <View style="@style/Divider.Horizontal"-->
 <!--                android:id="@+id/line2"-->
