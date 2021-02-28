@@ -1,12 +1,12 @@
 package ru.netology.motivationlist.dao
 
 import androidx.lifecycle.LiveData
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import androidx.room.Update
-import ru.netology.motivationlist.dto.Motivation
 import ru.netology.motivationlist.entity.MotivationEntity
 
+@Dao
 interface MotivationDao {
 
     @Query("SELECT * FROM MotivationEntity ORDER BY countLike DESC")
@@ -15,7 +15,7 @@ interface MotivationDao {
     @Query(
             """
            UPDATE MotivationEntity SET
-               countLike = countLike + 1               
+               countLike = countLike + 1
            WHERE id = :id
         """)
     fun likeUp(id:Long)
@@ -23,27 +23,27 @@ interface MotivationDao {
     @Query(
             """
            UPDATE MotivationEntity SET
-               countLike = countLike - 1               
+               countLike = countLike - 1
            WHERE id = :id
         """)
     fun likeDown(id:Long)
 
     @Query("""
            UPDATE MotivationEntity SET
-               countShare = countShare + 1               
+               countShare = countShare + 1
            WHERE id = :id
         """)
     fun share(id:Long)
 
-//    @Query("DELETE FROM PostEntity WHERE id = :id")
+//    @Query("DELETE FROM MotivationEntity WHERE id = :id")
 //    fun remove(id:Long)
 
 //    @Delete
-//    fun remove(post: PostEntity)
+//    fun remove(motivation: MotivationEntity)
 
     @Insert
-    fun savePost(post: MotivationEntity)
+    fun saveMotivation(motivation: MotivationEntity)
 
 //    @Update
-//    fun editPost(post: PostEntity)
+//    fun editPost(motivation: MotivationEntity)
 }

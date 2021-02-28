@@ -30,8 +30,8 @@ class MotivationAdapter(
     }
 
     override fun onBindViewHolder(holder: MotivationViewHolder, position: Int) {
-        val post = getItem(position)
-        holder.bind(post)
+        val motivation = getItem(position)
+        holder.bind(motivation)
     }
 }
 

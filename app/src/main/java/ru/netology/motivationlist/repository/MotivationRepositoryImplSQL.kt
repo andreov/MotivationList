@@ -13,11 +13,11 @@ class MotivationRepositoryImplSQL(private val dao: MotivationDao) : MotivationRe
         }
     }
 
-    override fun savePost(motivation: Motivation) {
+    override fun saveMotivation(motivation: Motivation) {
         if (motivation.id == 0L) {
             //post.author = "AndreOv"
             //post.published = "12 december 10:12"
-            dao.savePost(MotivationEntity.fromDto(motivation))
+            dao.saveMotivation(MotivationEntity.fromDto(motivation))
         } //else dao.editPost(MotivationEntity.fromDto(motivation)
 
     }

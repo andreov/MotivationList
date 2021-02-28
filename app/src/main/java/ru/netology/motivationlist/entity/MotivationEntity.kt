@@ -12,9 +12,9 @@ data class MotivationEntity(
         val id: Long,
         val author: String,
         val content: String,
-        val published: String = SimpleDateFormat("dd-MM-yyyy").format(Date()).toString(),
-        val countLike: Long = 0,
-        val countShare: Long = 0,
+        val published: String,// = SimpleDateFormat("dd-MM-yyyy").format(Date()).toString(),
+        val countLike: Long = 0L,
+        val countShare: Long = 0L,
         val urlContent: String = ""
 ) {
     fun toDto() = Motivation(id, author, content, published, countLike, countShare, urlContent)

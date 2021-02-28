@@ -4,6 +4,8 @@ plugins {
     //id 'kotlin-android-extensions'  // доступ по id
 }
 apply plugin: 'kotlin-kapt'
+//apply plugin: 'kotlin-android-extensions'
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
