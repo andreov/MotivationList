@@ -9,5 +9,18 @@
         android:id="@+id/feedFragment"
         android:name="ru.netology.motivationlist.activity.FeedFragment"
         android:label="fragment_feed"
-        tools:layout="@layout/fragment_feed" />
+        tools:layout="@layout/fragment_feed" >
+        <action
+            android:id="@+id/action_feedFragment_to_newMotivationFragment"
+            app:destination="@id/newMotivationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newMotivationFragment"
+        android:name="ru.netology.motivationlist.activity.NewMotivationFragment"
+        android:label="fragment_new_motivation"
+        tools:layout="@layout/fragment_new_motivation" >
+        <action
+            android:id="@+id/action_newMotivationFragment_to_feedFragment"
+            app:destination="@id/feedFragment" />
+    </fragment>
 </navigation>

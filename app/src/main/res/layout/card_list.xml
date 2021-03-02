@@ -36,6 +36,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/published"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/menu"
                 app:layout_constraintVertical_chainStyle="packed" />
 
             <TextView
@@ -50,6 +51,18 @@
                 app:layout_constraintTop_toBottomOf="@id/author"
                 app:layout_constraintBottom_toTopOf="@id/barrierTop"/>
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/menu"
+                style="@style/Widget.AppTheme.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:contentDescription="@string/menu"
+                app:icon="@drawable/ic_baseline_more_vert_24"
+                app:iconGravity="end"
+                app:iconPadding="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 <!--            <View style="@style/Divider.Horizontal"-->
 <!--                android:id="@+id/line1"-->
 <!--                android:layout_marginTop="8dp"-->
@@ -109,8 +122,6 @@
                 android:autoLink="web"
                 android:maxLines="1"
                 android:ellipsize="end"
-                android:text="@string/urlContent"
-                android:hint="@string/url_content"
                 android:textSize="12sp"
                 android:textStyle="normal"
                 app:layout_constraintBottom_toTopOf="@id/barrierBottom"

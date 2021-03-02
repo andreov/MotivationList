@@ -35,8 +35,8 @@ interface MotivationDao {
         """)
     fun share(id:Long)
 
-//    @Query("DELETE FROM MotivationEntity WHERE id = :id")
-//    fun remove(id:Long)
+    @Query("DELETE FROM MotivationEntity WHERE id = :id")
+    fun remove(id:Long)
 
 //    @Delete
 //    fun remove(motivation: MotivationEntity)

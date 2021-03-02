@@ -15,7 +15,7 @@ interface OnInteractionListener {
     fun onLikeUp(motivation: Motivation) {}
     fun onLikeDown(motivation: Motivation) {}
     fun onSortNameAutor(motivation: Motivation) {}
-    //fun onRemove(motivation: Motivation) {}
+    fun onRemove(motivation: Motivation) {}
     fun onShare(motivation: Motivation) {}
     fun onUrlContent(motivation: Motivation) {}
 }
@@ -45,6 +45,8 @@ class MotivationViewHolder(
             published.text = motivation.published
             content.text = motivation.content
             urlContent.text = motivation.urlContent
+            imageLike.text = motivation.countLike.toString()
+            imageShare.text = motivation.countShare.toString()
 
             if (urlContent.text == "") urlContent.visibility = View.GONE
             else {
@@ -65,6 +67,25 @@ class MotivationViewHolder(
             }
             author.setOnClickListener() {
                 onInteractionListener.onSortNameAutor(motivation)
+            }
+
+            menu.setOnClickListener {
+                PopupMenu(it.context, it).apply {
+                    inflate(R.menu.options)           // пункты меню
+                    setOnMenuItemClickListener { item ->  // обработчик клика пункта меню
+                        when (item.itemId) {
+                            R.id.remove -> {
+                                onInteractionListener.onRemove(motivation)
+                                true
+                            }
+//                            R.id.edit -> {
+//                                onInteractionListener.onEdit(post)
+//                                true
+//                            }
+                            else -> false
+                        }
+                    }
+                }.show()  //показ меню
             }
 
         }

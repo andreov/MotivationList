@@ -15,13 +15,14 @@ data class MotivationEntity(
         val published: String,// = SimpleDateFormat("dd-MM-yyyy").format(Date()).toString(),
         val countLike: Long = 0L,
         val countShare: Long = 0L,
-        val urlContent: String = ""
+        val urlContent: String = "",
+        val urlImage: String = ""
 ) {
-    fun toDto() = Motivation(id, author, content, published, countLike, countShare, urlContent)
+    fun toDto() = Motivation(id, author, content, published, countLike, countShare, urlContent, urlImage)
 
     companion object {
         fun fromDto(dto: Motivation) =
-                MotivationEntity(dto.id, dto.author, dto.content, dto.published, dto.countLike, dto.countShare, dto.urlContent)
+                MotivationEntity(dto.id, dto.author, dto.content, dto.published, dto.countLike, dto.countShare, dto.urlContent, dto.urlImage)
 
     }
 }

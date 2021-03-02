@@ -8,6 +8,6 @@ interface MotivationRepository {
     fun likeUp(id:Long)
     fun likeDown(id:Long)
     fun share(id:Long)
-    //fun remove(id:Long)
+    fun remove(id:Long)
     fun saveMotivation(motivation: Motivation)
 }

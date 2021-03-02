@@ -11,18 +11,20 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 private val empty = Motivation(   //data post для заполнения нового поста
-        id = 0,
-        author = "",
-        content = "",
-        published = "", //SimpleDateFormat("dd-MM-yyyy").format(Date()).toString(),
-        countShare = 0,
-        countLike = 0,
-        urlContent = ""
+    id = 0,
+    author = "",
+    content = "",
+    published = SimpleDateFormat("dd-MM-yyyy").format(Date()).toString(),
+    countShare = 0,
+    countLike = 0,
+    urlContent = "",
+    urlImage = ""
+
 )
 
-class MotivationViewModel (application: Application) : AndroidViewModel(application) {
+class MotivationViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: MotivationRepository = MotivationRepositoryImplSQL(
-            AppDb.getInstance(application).motivationDao()
+        AppDb.getInstance(application).motivationDao()
     )
     val data = repository.getAll()
     val edited = MutableLiveData(empty)
@@ -30,7 +32,7 @@ class MotivationViewModel (application: Application) : AndroidViewModel(applicat
     fun likeUp(id: Long) = repository.likeUp(id)
     fun likeDown(id: Long) = repository.likeDown(id)
     fun share(id: Long) = repository.share(id)
-    //fun remove(id: Long) = repository.remove(id)
+    fun remove(id: Long) = repository.remove(id)
 
 
     fun saveMotivation() {                 //сохранение поста
@@ -48,19 +50,35 @@ class MotivationViewModel (application: Application) : AndroidViewModel(applicat
 //        edited.value = post
 //    }
 
-//    fun changeContent(content: String) {   // изменение контента поста
-//        val text = content.trim()
-//        if (edited.value?.content == text) {
-//            return
-//        }
-//        edited.value = edited.value?.copy(content = text)
-//    }
-//
-//    fun changeUrl(content: String) {   // изменение url video
-//        val text = content.trim()
-//        if (edited.value?.urlVideo == text) {
-//            return
-//        }
-//        edited.value = edited.value?.copy(urlVideo = text)
-//    }
+    fun changeContent(content: String) {   // изменение контента поста
+        val text = content.trim()
+        if (edited.value?.content == text) {
+            return
+        }
+        edited.value = edited.value?.copy(content = text)
+    }
+
+    fun changeUrlContent(content: String) {   // изменение url video
+        val text = content.trim()
+        if (edited.value?.urlContent == text) {
+            return
+        }
+        edited.value = edited.value?.copy(urlContent = text)
+    }
+
+    fun changeUrlImage(content: String) {   // изменение url video
+        val text = content.trim()
+        if (edited.value?.urlImage == text) {
+            return
+        }
+        edited.value = edited.value?.copy(urlImage = text)
+    }
+
+    fun changeAuthor(content: String) {   // изменение url video
+        val text = content.trim()
+        if (edited.value?.author == text) {
+            return
+        }
+        edited.value = edited.value?.copy(author = text)
+    }
 }

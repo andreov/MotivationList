@@ -47,9 +47,9 @@ class FeedFragment: Fragment() {
                 viewModel.likeDown(motivation.id)
             }
 
-//            override fun onRemove(post: Post) {
-//                viewModel.remove(post.id)
-//            }
+            override fun onRemove(motivation: Motivation) {
+                viewModel.remove(motivation.id)
+            }
 
             // неявный интент - отправка video в yutube
             override fun onUrlContent(motivation: Motivation) {
@@ -76,23 +76,25 @@ class FeedFragment: Fragment() {
         })
 
         binding.recyclerview.adapter = adapter
-        viewModel.data.observe(viewLifecycleOwner, adapter::submitList)
+        viewModel.data.observe(viewLifecycleOwner) { motivations ->
+            adapter.submitList(motivations)
+        }
 
         binding.fab.setOnClickListener {
-            //findNavController().navigate(R.id.action_feedFragment_to_newPostFragment4)
+            findNavController().navigate(R.id.action_feedFragment_to_newMotivationFragment)
 
 
         }
 
-//        viewModel.edited.observe(viewLifecycleOwner) { post ->
-//            if (post.id == 0L) {
-//                return@observe
-//            }
-//            bundle.putParcelable(KEY_PARSE_DATA, motivation)
-//            //findNavController().navigate(R.id.action_feedFragment_to_editFragment2, bundle)
-//            //findNavController().navigate(R.id.action_feedFragment_to_newPostFragment4, bundle)
-//
-//        }
+        viewModel.edited.observe(viewLifecycleOwner) { motivation ->
+            if (motivation.id == 0L) {
+                return@observe
+            }
+            //bundle.putParcelable(KEY_PARSE_DATA, motivation)
+            //findNavController().navigate(R.id.action_feedFragment_to_editFragment2, bundle)
+            //findNavController().navigate(R.id.action_feedFragment_to_newPostFragment4, bundle)
+
+        }
         return binding.root
     }
 }
