@@ -1,5 +1,6 @@
 package ru.netology.motivationlist.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,13 @@ import ru.netology.motivationlist.viewModel.MotivationViewModel
 
 class NewMotivationFragment : Fragment() {
 
+//    companion object {
+//        //image pick code
+        private val IMAGE_PICK_CODE = 1;
+////        //Permission code
+////        private val PERMISSION_CODE = 1001;
+//    }
+
     private val viewModel: MotivationViewModel by viewModels(ownerProducer = ::requireParentFragment)
 
     override fun onCreateView(
@@ -32,11 +40,17 @@ class NewMotivationFragment : Fragment() {
 //        binding.newUrlImage.setText(details?.urlImage)
 //        binding.newAuthor.setText(details?.author)
 
+        binding.newImage.setOnClickListener{
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, IMAGE_PICK_CODE)
+        }
+
         binding.ok.setOnClickListener {
-            if (!binding.newContent.text.isNullOrBlank()) {
+            if (!binding.newContent.text.isNullOrBlank() && binding.newAuthor.text.isNullOrBlank()) {
                 viewModel.changeContent(binding.newContent.text.toString())
                 viewModel.changeUrlContent(binding.newUrlContent.text.toString())
-                viewModel.changeUrlImage(binding.newUrlImage.text.toString())
+                //viewModel.changeUrlImage(binding.newUrlImage.text.toString())
                 viewModel.changeAuthor(binding.newAuthor.text.toString())
 
                 viewModel.saveMotivation()

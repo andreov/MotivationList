@@ -30,7 +30,7 @@ class FeedFragment: Fragment() {
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val binding = FragmentFeedBinding.inflate(inflater, container, false)
 
@@ -51,21 +51,21 @@ class FeedFragment: Fragment() {
                 viewModel.remove(motivation.id)
             }
 
-            // неявный интент - отправка video в yutube
-            override fun onUrlContent(motivation: Motivation) {
-                val url: String = motivation.urlContent
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                startActivity(intent)
-
-            }
+            // неявный интент - открытие ссылки
+//            override fun onUrlContent(motivation: Motivation) {
+//                val url: String = motivation.urlContent
+//                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+//                startActivity(intent)
+//
+//            }
 
             // неявный интент - отправка текста в сообщение чата
             override fun onShare(motivation: Motivation) {
                 viewModel.share(motivation.id)
                 val intent = Intent().apply {
                     action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, motivation.content)
-                    putExtra(Intent.EXTRA_TEXT, motivation.author)
+                    putExtra(Intent.EXTRA_TEXT, motivation.author + "\n" + motivation.content)
+                    //putExtra(Intent.EXTRA_TEXT, motivation.author)
                     type = "text/plain"
                 }
                 val shareIntent =
@@ -76,6 +76,7 @@ class FeedFragment: Fragment() {
         })
 
         binding.recyclerview.adapter = adapter
+
         viewModel.data.observe(viewLifecycleOwner) { motivations ->
             adapter.submitList(motivations)
         }

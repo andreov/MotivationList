@@ -8,7 +8,7 @@ import ru.netology.motivationlist.dao.MotivationDao
 import ru.netology.motivationlist.dto.Motivation
 import ru.netology.motivationlist.entity.MotivationEntity
 
-@Database(entities = [MotivationEntity::class], version = 2)
+@Database(entities = [MotivationEntity::class], version = 1)
 abstract class AppDb : RoomDatabase() {
     abstract fun motivationDao(): MotivationDao
 
@@ -23,7 +23,7 @@ abstract class AppDb : RoomDatabase() {
         }
 
         private fun buildDatabase(context: Context) =
-                Room.databaseBuilder(context, AppDb::class.java, "motivationApp6.db")
+                Room.databaseBuilder(context, AppDb::class.java, "motivation1.db")
                         .allowMainThreadQueries()
                         .build()
     }

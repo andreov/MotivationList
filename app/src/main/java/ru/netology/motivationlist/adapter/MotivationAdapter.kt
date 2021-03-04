@@ -17,7 +17,7 @@ interface OnInteractionListener {
     fun onSortNameAutor(motivation: Motivation) {}
     fun onRemove(motivation: Motivation) {}
     fun onShare(motivation: Motivation) {}
-    fun onUrlContent(motivation: Motivation) {}
+    //fun onUrlContent(motivation: Motivation) {}
 }
 
 class MotivationAdapter(
@@ -62,9 +62,9 @@ class MotivationViewHolder(
             imageShare.setOnClickListener {
                 onInteractionListener.onShare(motivation)
             }
-            urlContent.setOnClickListener() {
-                onInteractionListener.onUrlContent(motivation)
-            }
+//            urlContent.setOnClickListener() {
+//                onInteractionListener.onUrlContent(motivation)
+//            }
             author.setOnClickListener() {
                 onInteractionListener.onSortNameAutor(motivation)
             }
