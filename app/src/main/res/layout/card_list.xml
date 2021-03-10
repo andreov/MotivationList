@@ -88,7 +88,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="4dp"
                 android:contentDescription="image Idea"
-                android:scaleType="fitStart"
+                android:scaleType="centerCrop"
                 app:layout_constraintBottom_toTopOf="@id/content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -14,7 +14,7 @@ private val empty = Motivation(   //data post для заполнения нов
     id = 0,
     author = "",
     content = "",
-    published = "",//SimpleDateFormat("dd-MM-yyyy").format(Date()).toString(),
+    published = SimpleDateFormat("dd-MM-yyyy").format(Date()).toString(),
     countShare = 0,
     countLike = 0,
     urlContent = "",
@@ -67,11 +67,11 @@ class MotivationViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     fun changeUrlImage(content: String) {   // изменение url video
-        val text = content.trim()
-        if (edited.value?.urlImage == text) {
-            return
-        }
-        edited.value = edited.value?.copy(urlImage = text)
+        //val text = content.substringAfter(':')
+//        if (edited.value?.urlImage == text) {
+//            return
+//        }
+        edited.value = edited.value?.copy(urlImage = content)
     }
 
     fun changeAuthor(content: String) {   // изменение url video

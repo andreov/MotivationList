@@ -1,5 +1,6 @@
 package ru.netology.motivationlist.adapter
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.netology.motivationlist.R
 import ru.netology.motivationlist.databinding.CardListBinding
 import ru.netology.motivationlist.dto.Motivation
+import java.net.URI
 
 interface OnInteractionListener {
     fun onLikeUp(motivation: Motivation) {}
@@ -44,9 +46,12 @@ class MotivationViewHolder(
             author.text = motivation.author
             published.text = motivation.published
             content.text = motivation.content
-            urlContent.text = motivation.urlContent
+            urlContent.text = motivation.urlImage
             imageLike.text = motivation.countLike.toString()
             imageShare.text = motivation.countShare.toString()
+            val url:String = motivation.urlImage
+            image.setImageURI(null)
+            image.setImageURI(Uri.parse(url))
 
             if (urlContent.text == "") urlContent.visibility = View.GONE
             else {

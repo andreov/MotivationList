@@ -16,7 +16,7 @@ import ru.netology.motivationlist.databinding.FragmentFeedBinding
 import ru.netology.motivationlist.dto.Motivation
 import ru.netology.motivationlist.viewModel.MotivationViewModel
 
-class FeedFragment: Fragment() {
+class FeedFragment : Fragment() {
 
     companion object {
         const val KEY_PARSE_DATA = "key1"
@@ -27,9 +27,9 @@ class FeedFragment: Fragment() {
     private val viewModel: MotivationViewModel by viewModels(ownerProducer = ::requireParentFragment)
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
 
         val binding = FragmentFeedBinding.inflate(inflater, container, false)
@@ -43,7 +43,9 @@ class FeedFragment: Fragment() {
             override fun onLikeUp(motivation: Motivation) {
                 viewModel.likeUp(motivation.id)
 
-            }override fun onLikeDown(motivation: Motivation) {
+            }
+
+            override fun onLikeDown(motivation: Motivation) {
                 viewModel.likeDown(motivation.id)
             }
 
@@ -69,7 +71,7 @@ class FeedFragment: Fragment() {
                     type = "text/plain"
                 }
                 val shareIntent =
-                        Intent.createChooser(intent, getString(R.string.chooser_share_post))
+                    Intent.createChooser(intent, getString(R.string.chooser_share_post))
                 startActivity(shareIntent)
 
             }
@@ -83,7 +85,6 @@ class FeedFragment: Fragment() {
 
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.action_feedFragment_to_newMotivationFragment)
-
 
         }
 
