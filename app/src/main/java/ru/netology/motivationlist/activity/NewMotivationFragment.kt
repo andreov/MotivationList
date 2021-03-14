@@ -21,19 +21,15 @@ import ru.netology.motivationlist.viewModel.MotivationViewModel
 
 class NewMotivationFragment : Fragment() {
 
-//    companion object {
-//        //image pick code
-        private val IMAGE_PICK_CODE = 1;
-////        //Permission code
-////        private val PERMISSION_CODE = 1001;
-//    }
+    private val IMAGE_PICK_CODE = 1;
+
 
     private val viewModel: MotivationViewModel by viewModels(ownerProducer = ::requireParentFragment)
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentNewMotivationBinding.inflate(inflater, container, false)
 
@@ -43,7 +39,7 @@ class NewMotivationFragment : Fragment() {
 //        binding.newUrlImage.setText(details?.urlImage)
 //        binding.newAuthor.setText(details?.author)
 
-        binding.newImage.setOnClickListener{
+        binding.newImage.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             startActivityForResult(intent, IMAGE_PICK_CODE)
@@ -55,7 +51,7 @@ class NewMotivationFragment : Fragment() {
             if (!binding.newContent.text.isNullOrBlank() || !binding.newAuthor.text.isNullOrBlank()) {
                 viewModel.changeContent(binding.newContent.text.toString())
                 viewModel.changeUrlContent(binding.newUrlContent.text.toString())
-                val urlImage:String="https://lapkins.ru/upload/uf/49d/49d4ab7bbc79edcf2ea7e2a51212b7be.jpg"
+                //val urlImage:String="https://lapkins.ru/upload/uf/49d/49d4ab7bbc79edcf2ea7e2a51212b7be.jpg"
                 //val uri= Uri.parse(urlImage).toString()
                 //viewModel.changeUrlImage(binding.newUrlImage.text.toString())
                 //viewModel.changeUrlImage(urlImage)
@@ -64,22 +60,28 @@ class NewMotivationFragment : Fragment() {
                 viewModel.saveMotivation()
                 findNavController().navigate(R.id.action_newMotivationFragment_to_feedFragment)
             } else {
-                Snackbar.make(binding.root, R.string.error_empty_content, BaseTransientBottomBar.LENGTH_INDEFINITE)
-                        .setAction(android.R.string.ok) {
-                            findNavController().navigate(R.id.action_newMotivationFragment_to_feedFragment)
-                        }
-                        .show()
+                Snackbar.make(
+                    binding.root,
+                    R.string.error_empty_content,
+                    BaseTransientBottomBar.LENGTH_INDEFINITE
+                )
+                    .setAction(android.R.string.ok) {
+                        findNavController().navigate(R.id.action_newMotivationFragment_to_feedFragment)
+                    }
+                    .show()
             }
 
             AndroidUtils.hideKeyboard(requireView())
         }
         return binding.root
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
+        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE) {
 
             viewModel.changeUrlImage(data?.data.toString())
+
 
             //findViewById<ImageView>(R.id.image_view).setImageURI(data?.data)
         }

@@ -5,10 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import ru.netology.motivationlist.R
+import ru.netology.motivationlist.activity.FeedFragment
 import ru.netology.motivationlist.databinding.CardListBinding
 import ru.netology.motivationlist.dto.Motivation
 import java.net.URI
@@ -50,8 +54,20 @@ class MotivationViewHolder(
             imageLike.text = motivation.countLike.toString()
             imageShare.text = motivation.countShare.toString()
             val url:String = motivation.urlImage
-            image.setImageURI(null)
-            image.setImageURI(Uri.parse(url))
+
+            if (url == "") image.visibility = View.GONE
+            else {
+                image.visibility = View.VISIBLE
+            }
+            //image.setImageURI(null)
+            //image.setImageURI(Uri.parse(url))
+            Glide
+                .with(image)
+                .load(Uri.parse(url))
+                .centerCrop()
+                .skipMemoryCache(true)
+                .into(image)
+
 
             if (urlContent.text == "") urlContent.visibility = View.GONE
             else {
