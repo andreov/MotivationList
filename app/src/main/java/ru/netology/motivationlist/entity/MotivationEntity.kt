@@ -17,6 +17,7 @@ data class MotivationEntity(
         val countShare: Long = 0L,
         val urlContent: String = "",
         val urlImage: String = ""
+
 ) {
     fun toDto() = Motivation(id, author, content, published, countLike, countShare, urlContent, urlImage)
 

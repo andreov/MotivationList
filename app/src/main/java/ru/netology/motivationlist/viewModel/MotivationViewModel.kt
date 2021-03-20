@@ -1,10 +1,13 @@
 package ru.netology.motivationlist.viewModel
 
 import android.app.Application
+import android.os.Bundle
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.netology.motivationlist.db.AppDb
 import ru.netology.motivationlist.dto.Motivation
+import ru.netology.motivationlist.entity.MotivationEntity
 import ru.netology.motivationlist.repository.MotivationRepository
 import ru.netology.motivationlist.repository.MotivationRepositoryImplSQL
 import java.text.SimpleDateFormat
@@ -20,19 +23,44 @@ private val empty = Motivation(   //data post для заполнения нов
     urlContent = "",
     urlImage = ""
 
+
 )
 
 class MotivationViewModel(application: Application) : AndroidViewModel(application) {
+
+
     private val repository: MotivationRepository = MotivationRepositoryImplSQL(
         AppDb.getInstance(application).motivationDao()
     )
-    val data = repository.getAll()
-    val edited = MutableLiveData(empty)
+
+    //var data = repository.getAll()
+
+    var data: LiveData<MutableList<Motivation>> = repository.getAll()
+
+//    init {
+//        data.value = repository.getAll()
+//    }
+
+    var dataName: MutableLiveData<MutableList<Motivation>> = MutableLiveData()
+
+    //data=repository.getAll()
+    var edited = MutableLiveData(empty)
+
+
 
     fun likeUp(id: Long) = repository.likeUp(id)
     fun likeDown(id: Long) = repository.likeDown(id)
     fun share(id: Long) = repository.share(id)
     fun remove(id: Long) = repository.remove(id)
+    fun isClickName(motivation: Motivation) {
+        dataName.value = repository.getName(motivation.author)
+
+    }
+
+
+//    fun isClick(author:String){
+//        dataName = repository.getName()
+//    }
 
 
     fun saveMotivation() {                 //сохранение поста

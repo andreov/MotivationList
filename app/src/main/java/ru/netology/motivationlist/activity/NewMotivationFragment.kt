@@ -79,10 +79,7 @@ class NewMotivationFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE) {
-
             viewModel.changeUrlImage(data?.data.toString())
-
-
             //findViewById<ImageView>(R.id.image_view).setImageURI(data?.data)
         }
     }

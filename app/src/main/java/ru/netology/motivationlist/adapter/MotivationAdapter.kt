@@ -15,12 +15,13 @@ import ru.netology.motivationlist.R
 import ru.netology.motivationlist.activity.FeedFragment
 import ru.netology.motivationlist.databinding.CardListBinding
 import ru.netology.motivationlist.dto.Motivation
+//import ru.netology.motivationlist.viewModel.MotivationViewModel.Companion.isAuthor
 import java.net.URI
 
 interface OnInteractionListener {
     fun onLikeUp(motivation: Motivation) {}
     fun onLikeDown(motivation: Motivation) {}
-    fun onSortNameAutor(motivation: Motivation) {}
+    fun onFilterNameAuthor(motivation: Motivation) {}
     fun onRemove(motivation: Motivation) {}
     fun onShare(motivation: Motivation) {}
     //fun onUrlContent(motivation: Motivation) {}
@@ -53,7 +54,9 @@ class MotivationViewHolder(
             urlContent.text = motivation.urlImage
             imageLike.text = motivation.countLike.toString()
             imageShare.text = motivation.countShare.toString()
+
             val url:String = motivation.urlImage
+
 
             if (url == "") image.visibility = View.GONE
             else {
@@ -79,6 +82,7 @@ class MotivationViewHolder(
             }
             imageDisLike.setOnClickListener{
                 onInteractionListener.onLikeDown(motivation)
+
             }
             imageShare.setOnClickListener {
                 onInteractionListener.onShare(motivation)
@@ -87,7 +91,7 @@ class MotivationViewHolder(
 //                onInteractionListener.onUrlContent(motivation)
 //            }
             author.setOnClickListener() {
-                onInteractionListener.onSortNameAutor(motivation)
+                onInteractionListener.onFilterNameAuthor(motivation)
             }
 
             menu.setOnClickListener {

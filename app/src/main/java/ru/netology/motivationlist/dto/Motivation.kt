@@ -14,4 +14,6 @@ data class Motivation(
         val countShare: Long = 0,
         val urlContent: String = "",
         val urlImage: String = ""
+
+
 )//:Parcelable
