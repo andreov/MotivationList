@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import ru.netology.motivationlist.R
 import ru.netology.motivationlist.adapter.MotivationAdapter
 import ru.netology.motivationlist.adapter.OnInteractionListener
@@ -19,7 +21,6 @@ import ru.netology.motivationlist.entity.MotivationEntity
 
 
 import ru.netology.motivationlist.viewModel.MotivationViewModel
-
 
 
 class FeedFragment : Fragment() {
@@ -36,13 +37,21 @@ class FeedFragment : Fragment() {
     ): View {
 
         val binding = FragmentFeedBinding.inflate(inflater, container, false)
-        var isAuthor:Boolean = false
 
         val adapter = MotivationAdapter(object : OnInteractionListener {//
 
             override fun onFilterNameAuthor(motivation: Motivation) {
-               // isAuthor = true
                 viewModel.isClickName(motivation)
+                Snackbar.make(
+                    binding.root,
+                    R.string.error_empty_content,
+                    BaseTransientBottomBar.LENGTH_INDEFINITE
+                )
+                    .setAction(android.R.string.ok) {
+                        viewModel.removeFilter()
+                    }
+                    .show()
+
             }
 
             override fun onLikeUp(motivation: Motivation) {
@@ -61,8 +70,7 @@ class FeedFragment : Fragment() {
 //            override fun onUrlContent(motivation: Motivation) {
 //                val url: String = motivation.urlContent
 //                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-//                startActivity(intent)
-//
+//                startActivity(intent)//
 //            }
 
             // неявный интент - отправка текста в сообщение чата
@@ -83,20 +91,15 @@ class FeedFragment : Fragment() {
 
         binding.recyclerview.adapter = adapter
 
+        viewModel.mediator.observe(viewLifecycleOwner) {}
 
-        viewModel.data.observe(viewLifecycleOwner) { motivation ->
-            adapter.submitList(motivation)
-            //adapter.notifyDataSetChanged()
+        viewModel.dataName.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
         }
 
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.action_feedFragment_to_newMotivationFragment)
 
-        }
-
-        viewModel.dataName.observe(viewLifecycleOwner) {
-            //if(isAuthor) return@observe
-            adapter.submitList(it)
         }
 
         return binding.root

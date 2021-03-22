@@ -4,6 +4,7 @@ import android.app.Application
 import android.os.Bundle
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import ru.netology.motivationlist.db.AppDb
 import ru.netology.motivationlist.dto.Motivation
@@ -33,35 +34,30 @@ class MotivationViewModel(application: Application) : AndroidViewModel(applicati
         AppDb.getInstance(application).motivationDao()
     )
 
-    //var data = repository.getAll()
-
     var data: LiveData<MutableList<Motivation>> = repository.getAll()
 
-//    init {
-//        data.value = repository.getAll()
-//    }
-
-    var dataName: MutableLiveData<MutableList<Motivation>> = MutableLiveData()
-
-    //data=repository.getAll()
     var edited = MutableLiveData(empty)
 
+    var dataName = MutableLiveData<MutableList<Motivation>>() //= MutableLiveData()
+    val mediator = MediatorLiveData<Unit>()
 
+    init {
+        mediator.addSource(data, { dataName.value = it })
+    }
 
     fun likeUp(id: Long) = repository.likeUp(id)
     fun likeDown(id: Long) = repository.likeDown(id)
     fun share(id: Long) = repository.share(id)
     fun remove(id: Long) = repository.remove(id)
     fun isClickName(motivation: Motivation) {
-        dataName.value = repository.getName(motivation.author)
-
+        mediator.removeSource(data)
+        mediator.addSource(data, { dataName.value = repository.getName(motivation.author) })
     }
 
-
-//    fun isClick(author:String){
-//        dataName = repository.getName()
-//    }
-
+    fun removeFilter() {
+        mediator.removeSource(data)
+        mediator.addSource(data, { dataName.value = it })
+    }
 
     fun saveMotivation() {                 //сохранение поста
         edited.value?.let {
@@ -70,43 +66,22 @@ class MotivationViewModel(application: Application) : AndroidViewModel(applicati
         edited.value = empty
     }
 
-//    fun changeId() {
-//        edited.value = empty
-//    }
-//
-//    fun editPost(post: Post) {
-//        edited.value = post
-//    }
-
     fun changeContent(content: String) {   // изменение контента поста
-        val text = content.trim()
-        if (edited.value?.content == text) {
-            return
-        }
-        edited.value = edited.value?.copy(content = text)
+        edited.value = edited.value?.copy(content = content)
     }
 
     fun changeUrlContent(content: String) {   // изменение url video
         val text = content.trim()
-        if (edited.value?.urlContent == text) {
-            return
-        }
         edited.value = edited.value?.copy(urlContent = text)
     }
 
     fun changeUrlImage(content: String) {   // изменение url video
-        //val text = content.substringAfter(':')
-//        if (edited.value?.urlImage == text) {
-//            return
-//        }
-        edited.value = edited.value?.copy(urlImage = content)
+        val text = content.trim()
+        edited.value = edited.value?.copy(urlImage = text)
     }
 
     fun changeAuthor(content: String) {   // изменение url video
         val text = content.trim()
-        if (edited.value?.author == text) {
-            return
-        }
         edited.value = edited.value?.copy(author = text)
     }
 }

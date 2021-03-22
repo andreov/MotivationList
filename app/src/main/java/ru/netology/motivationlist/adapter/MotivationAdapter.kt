@@ -24,7 +24,6 @@ interface OnInteractionListener {
     fun onFilterNameAuthor(motivation: Motivation) {}
     fun onRemove(motivation: Motivation) {}
     fun onShare(motivation: Motivation) {}
-    //fun onUrlContent(motivation: Motivation) {}
 }
 
 class MotivationAdapter(
@@ -57,7 +56,6 @@ class MotivationViewHolder(
 
             val url:String = motivation.urlImage
 
-
             if (url == "") image.visibility = View.GONE
             else {
                 image.visibility = View.VISIBLE
@@ -70,7 +68,6 @@ class MotivationViewHolder(
                 .centerCrop()
                 .skipMemoryCache(true)
                 .into(image)
-
 
             if (urlContent.text == "") urlContent.visibility = View.GONE
             else {
@@ -103,16 +100,11 @@ class MotivationViewHolder(
                                 onInteractionListener.onRemove(motivation)
                                 true
                             }
-//                            R.id.edit -> {
-//                                onInteractionListener.onEdit(post)
-//                                true
-//                            }
                             else -> false
                         }
                     }
                 }.show()  //показ меню
             }
-
         }
     }
 }

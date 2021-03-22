@@ -11,10 +11,10 @@ import ru.netology.motivationlist.entity.MotivationEntity
 interface MotivationDao {
 
     @Query("SELECT * FROM MotivationEntity ORDER BY countLike DESC")
-    fun getAll(): LiveData<MutableList<MotivationEntity>>
+    fun getAll(): LiveData<List<MotivationEntity>>
 
     @Query("SELECT * FROM MotivationEntity WHERE author = :author ORDER BY countLike DESC")
-    fun getName(author:String): MutableList<MotivationEntity>
+    fun getName(author:String): List<MotivationEntity>
 
     @Query(
             """

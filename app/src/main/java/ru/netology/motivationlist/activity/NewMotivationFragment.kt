@@ -33,30 +33,17 @@ class NewMotivationFragment : Fragment() {
     ): View? {
         val binding = FragmentNewMotivationBinding.inflate(inflater, container, false)
 
-//        val details = arguments?.getParcelable<Motivation>(FeedFragment.KEY_PARSE_DATA)
-//        binding.newContent.setText(details?.content)
-//        binding.newUrlContent.setText(details?.urlContent)
-//        binding.newUrlImage.setText(details?.urlImage)
-//        binding.newAuthor.setText(details?.author)
-
         binding.newImage.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             startActivityForResult(intent, IMAGE_PICK_CODE)
         }
 
-
-
         binding.ok.setOnClickListener {
             if (!binding.newContent.text.isNullOrBlank() || !binding.newAuthor.text.isNullOrBlank()) {
                 viewModel.changeContent(binding.newContent.text.toString())
                 viewModel.changeUrlContent(binding.newUrlContent.text.toString())
-                //val urlImage:String="https://lapkins.ru/upload/uf/49d/49d4ab7bbc79edcf2ea7e2a51212b7be.jpg"
-                //val uri= Uri.parse(urlImage).toString()
-                //viewModel.changeUrlImage(binding.newUrlImage.text.toString())
-                //viewModel.changeUrlImage(urlImage)
                 viewModel.changeAuthor(binding.newAuthor.text.toString())
-
                 viewModel.saveMotivation()
                 findNavController().navigate(R.id.action_newMotivationFragment_to_feedFragment)
             } else {
@@ -80,7 +67,6 @@ class NewMotivationFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE) {
             viewModel.changeUrlImage(data?.data.toString())
-            //findViewById<ImageView>(R.id.image_view).setImageURI(data?.data)
         }
     }
 
