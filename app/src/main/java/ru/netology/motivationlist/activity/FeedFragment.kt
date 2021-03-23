@@ -44,7 +44,7 @@ class FeedFragment : Fragment() {
                 viewModel.isClickName(motivation)
                 Snackbar.make(
                     binding.root,
-                    R.string.error_empty_content,
+                    R.string.filter_name,
                     BaseTransientBottomBar.LENGTH_INDEFINITE
                 )
                     .setAction(android.R.string.ok) {

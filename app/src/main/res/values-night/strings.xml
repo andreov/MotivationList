@@ -7,4 +7,6 @@
     <string name="add_author">add autor</string>
     <string name="menu">menu</string>
     <string name="remove_motivation">removeMotivation</string>
+    <string name="input_url_content">Input URL Content</string>
+    <string name="input_image">input Image</string>
 </resources>

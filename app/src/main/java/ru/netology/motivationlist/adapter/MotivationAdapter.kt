@@ -50,7 +50,7 @@ class MotivationViewHolder(
             author.text = motivation.author
             published.text = motivation.published
             content.text = motivation.content
-            urlContent.text = motivation.urlImage
+            urlContent.text = motivation.urlContent
             imageLike.text = motivation.countLike.toString()
             imageShare.text = motivation.countShare.toString()
 

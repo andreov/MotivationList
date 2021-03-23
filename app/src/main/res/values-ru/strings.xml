@@ -1,17 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Motivation List</string>
+    <string name="app_name">Список Мотиваций</string>
     <string name="Autor">Беатрис Лопес</string>
     <string name="date">22.02.2021</string>
     <string name="content">Мотивация - это внутреннее состояние, которое активизирует, направляет и поддерживает поведение, направленное на достижение определённых целей. Таким образом, мотивация является причиной поведения и способностью человека деятельно удовлетворять свои потребности → https://zen.yandex.ru/media/cognifit/motivaciia-vidy-prepiatstviia-i-poleznye-sovety-dlia-dostijeniia-celei-5c891d07efadc400b227cfef?utm_source=serp</string>
-    <string name="add_content">add_content</string>
-    <string name="url_content">url content</string>
+    <string name="add_content">Добавить мотивацию</string>
+    <string name="url_content">Адрес URL мотивации </string>
     <string name="urlContent">https://zen.yandex.ru/media/cognifit/motivaciia-vidy-prepiatstviia-i-poleznye-sovety-dlia-dostijeniia-celei-5c891d07efadc400b227cfef?utm_source=serp</string>
-    <string name="chooser_share_post">Share Motivation</string>
-    <string name="add_author">add Author</string>
-    <string name="error_empty_content">error_empty_content</string>
+    <string name="chooser_share_post">Поделиться мотивацией</string>
+    <string name="add_author">Добавить автора</string>
+    <string name="error_empty_content">Ошибка: поля Автор и Мотивация пустые </string>
     <string name="menu">menu</string>
-    <string name="remove_motivation">remove Motivation</string>
-    <string name="filter_name">Filter name, for back press OK</string>
-    <string name="input_url_content">Input URL Content</string>
-    <string name="input_image">input Image</string>
+    <string name="remove_motivation">Удалить мотивацию</string>
+    <string name="filter_name">Список отфильтрован по имени, дла воврата нажмите ОК</string>
+    <string name="input_url_content">URL Мотивации</string>
+    <string name="input_image">Вставить изображение</string>
 </resources>
