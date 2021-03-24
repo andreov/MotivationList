@@ -42,12 +42,9 @@ interface MotivationDao {
     @Query("DELETE FROM MotivationEntity WHERE id = :id")
     fun remove(id:Long)
 
-//    @Delete
-//    fun remove(motivation: MotivationEntity)
 
     @Insert
     fun saveMotivation(motivation: MotivationEntity)
 
-//    @Update
-//    fun editPost(motivation: MotivationEntity)
+
 }

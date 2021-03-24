@@ -55,6 +55,7 @@ class NewMotivationFragment : Fragment() {
                     .setAction(android.R.string.ok) {
                         findNavController().navigate(R.id.action_newMotivationFragment_to_feedFragment)
                     }
+
                     .show()
             }
 

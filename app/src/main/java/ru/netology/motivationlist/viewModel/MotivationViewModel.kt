@@ -38,7 +38,7 @@ class MotivationViewModel(application: Application) : AndroidViewModel(applicati
 
     var edited = MutableLiveData(empty)
 
-    var dataName = MutableLiveData<MutableList<Motivation>>() //= MutableLiveData()
+    var dataName = MutableLiveData<MutableList<Motivation>>()
     val mediator = MediatorLiveData<Unit>()
 
     init {
@@ -59,28 +59,28 @@ class MotivationViewModel(application: Application) : AndroidViewModel(applicati
         mediator.addSource(data, { dataName.value = it })
     }
 
-    fun saveMotivation() {                 //сохранение поста
+    fun saveMotivation() {
         edited.value?.let {
             repository.saveMotivation(it)
         }
         edited.value = empty
     }
 
-    fun changeContent(content: String) {   // изменение контента поста
+    fun changeContent(content: String) {
         edited.value = edited.value?.copy(content = content)
     }
 
-    fun changeUrlContent(content: String) {   // изменение url video
+    fun changeUrlContent(content: String) {
         val text = content.trim()
         edited.value = edited.value?.copy(urlContent = text)
     }
 
-    fun changeUrlImage(content: String) {   // изменение url video
+    fun changeUrlImage(content: String) {
         val text = content.trim()
         edited.value = edited.value?.copy(urlImage = text)
     }
 
-    fun changeAuthor(content: String) {   // изменение url video
+    fun changeAuthor(content: String) {
         val text = content.trim()
         edited.value = edited.value?.copy(author = text)
     }

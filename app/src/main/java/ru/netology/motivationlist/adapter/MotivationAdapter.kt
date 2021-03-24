@@ -60,8 +60,7 @@ class MotivationViewHolder(
             else {
                 image.visibility = View.VISIBLE
             }
-            //image.setImageURI(null)
-            //image.setImageURI(Uri.parse(url))
+
             Glide
                 .with(image)
                 .load(Uri.parse(url))
@@ -84,9 +83,7 @@ class MotivationViewHolder(
             imageShare.setOnClickListener {
                 onInteractionListener.onShare(motivation)
             }
-//            urlContent.setOnClickListener() {
-//                onInteractionListener.onUrlContent(motivation)
-//            }
+
             author.setOnClickListener() {
                 onInteractionListener.onFilterNameAuthor(motivation)
             }

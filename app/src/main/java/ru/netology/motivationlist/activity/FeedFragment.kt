@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
@@ -38,10 +39,11 @@ class FeedFragment : Fragment() {
 
         val binding = FragmentFeedBinding.inflate(inflater, container, false)
 
-        val adapter = MotivationAdapter(object : OnInteractionListener {//
+        val adapter = MotivationAdapter(object : OnInteractionListener {
 
             override fun onFilterNameAuthor(motivation: Motivation) {
                 viewModel.isClickName(motivation)
+
                 Snackbar.make(
                     binding.root,
                     R.string.filter_name,
@@ -49,7 +51,7 @@ class FeedFragment : Fragment() {
                 )
                     .setAction(android.R.string.ok) {
                         viewModel.removeFilter()
-                    }
+                    }.setBackgroundTint(resources.getColor(R.color.colorPrimary))
                     .show()
 
             }
@@ -65,13 +67,6 @@ class FeedFragment : Fragment() {
             override fun onRemove(motivation: Motivation) {
                 viewModel.remove(motivation.id)
             }
-
-            // неявный интент - открытие ссылки
-//            override fun onUrlContent(motivation: Motivation) {
-//                val url: String = motivation.urlContent
-//                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-//                startActivity(intent)//
-//            }
 
             // неявный интент - отправка текста в сообщение чата
             override fun onShare(motivation: Motivation) {
