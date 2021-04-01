@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.PagedList
 import ru.netology.motivationlist.db.AppDb
 import ru.netology.motivationlist.dto.Motivation
 import ru.netology.motivationlist.entity.MotivationEntity
@@ -34,6 +35,7 @@ class MotivationViewModel(application: Application) : AndroidViewModel(applicati
         AppDb.getInstance(application).motivationDao()
     )
 
+    private var dataPaging: LiveData<PagedList<Motivation>> = repository.getPaged()
     var data: LiveData<MutableList<Motivation>> = repository.getAll()
 
     var edited = MutableLiveData(empty)
@@ -42,7 +44,7 @@ class MotivationViewModel(application: Application) : AndroidViewModel(applicati
     val mediator = MediatorLiveData<Unit>()
 
     init {
-        mediator.addSource(data, { dataName.value = it })
+        mediator.addSource(dataPaging, { dataName.value = it })
     }
 
     fun likeUp(id: Long) = repository.likeUp(id)
@@ -50,13 +52,13 @@ class MotivationViewModel(application: Application) : AndroidViewModel(applicati
     fun share(id: Long) = repository.share(id)
     fun remove(id: Long) = repository.remove(id)
     fun isClickName(motivation: Motivation) {
-        mediator.removeSource(data)
-        mediator.addSource(data, { dataName.value = repository.getName(motivation.author) })
+        mediator.removeSource(dataPaging)
+        mediator.addSource(dataPaging, { dataName.value = repository.getName(motivation.author) })
     }
 
     fun removeFilter() {
-        mediator.removeSource(data)
-        mediator.addSource(data, { dataName.value = it })
+        mediator.removeSource(dataPaging)
+        mediator.addSource(dataPaging, { dataName.value = it })
     }
 
     fun saveMotivation() {

@@ -1,7 +1,12 @@
 package ru.netology.motivationlist.repository
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import androidx.lifecycle.map
+import androidx.paging.DataSource
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 
 import ru.netology.motivationlist.dao.MotivationDao
 import ru.netology.motivationlist.dto.Motivation
@@ -13,6 +18,14 @@ class MotivationRepositoryImplSQL(private val dao: MotivationDao) : MotivationRe
         mutableList.map { entity ->
             entity.toDto()
         }.toMutableList()
+    }
+
+    override fun getPaged(): LiveData<PagedList<Motivation>> {
+        val factory: DataSource.Factory<Int, Motivation> = dao.getAllPaged().map { entity ->
+            entity.toDto()
+        }
+        val pagedListBuilder: LivePagedListBuilder<Int, Motivation> = LivePagedListBuilder(factory,5)
+        return pagedListBuilder.build()
     }
 
     override fun saveMotivation(motivation: Motivation) {

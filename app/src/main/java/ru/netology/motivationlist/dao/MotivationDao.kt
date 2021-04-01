@@ -2,6 +2,7 @@ package ru.netology.motivationlist.dao
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -12,6 +13,9 @@ interface MotivationDao {
 
     @Query("SELECT * FROM MotivationEntity ORDER BY countLike DESC")
     fun getAll(): LiveData<List<MotivationEntity>>
+
+    @Query("SELECT * FROM MotivationEntity ORDER BY countLike DESC")
+    fun getAllPaged(): DataSource.Factory<Int,MotivationEntity>
 
     @Query("SELECT * FROM MotivationEntity WHERE author = :author ORDER BY countLike DESC")
     fun getName(author:String): List<MotivationEntity>
