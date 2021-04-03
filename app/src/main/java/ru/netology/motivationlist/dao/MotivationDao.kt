@@ -18,7 +18,7 @@ interface MotivationDao {
     fun getAllPaged(): DataSource.Factory<Int,MotivationEntity>
 
     @Query("SELECT * FROM MotivationEntity WHERE author = :author ORDER BY countLike DESC")
-    fun getName(author:String): List<MotivationEntity>
+    fun getName(author:String): DataSource.Factory<Int,MotivationEntity> //List<MotivationEntity>
 
     @Query(
             """

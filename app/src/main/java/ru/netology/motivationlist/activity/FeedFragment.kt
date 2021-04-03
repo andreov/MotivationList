@@ -42,7 +42,7 @@ class FeedFragment : Fragment() {
         val adapter = MotivationAdapter(object : OnInteractionListener {
 
             override fun onFilterNameAuthor(motivation: Motivation) {
-                viewModel.isClickName(motivation)
+                //viewModel.isClickName(motivation)
 
                 Snackbar.make(
                     binding.root,
@@ -86,9 +86,9 @@ class FeedFragment : Fragment() {
 
         binding.recyclerview.adapter = adapter
 
-        viewModel.mediator.observe(viewLifecycleOwner) {}
+        //viewModel.mediator.observe(viewLifecycleOwner) {}
 
-        viewModel.dataName.observe(viewLifecycleOwner) {
+        viewModel.dataPaging.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
 

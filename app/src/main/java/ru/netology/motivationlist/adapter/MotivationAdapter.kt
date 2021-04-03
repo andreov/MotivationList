@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.paging.PagedList
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -28,7 +30,7 @@ interface OnInteractionListener {
 
 class MotivationAdapter(
         private val onInteractionListener: OnInteractionListener
-) : ListAdapter<Motivation, MotivationViewHolder>(MotivationDiffCallback()) {
+) : PagedListAdapter<Motivation, MotivationViewHolder>(MotivationDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MotivationViewHolder {
         val binding = CardListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -36,8 +38,14 @@ class MotivationAdapter(
     }
 
     override fun onBindViewHolder(holder: MotivationViewHolder, position: Int) {
-        val motivation = getItem(position)
-        holder.bind(motivation)
+        val motivation: Motivation? = getItem(position)
+        if (motivation == null) {
+            holder.clear()
+        } else {
+            holder.bind(motivation)
+        }
+
+
     }
 }
 
@@ -103,6 +111,17 @@ class MotivationViewHolder(
                 }.show()  //показ меню
             }
         }
+    }
+    fun clear(){
+        binding.apply {
+            author.text = null
+            published.text = null
+            content.text = null
+            urlContent.text = null
+            imageLike.text = null
+            imageShare.text = null
+        }
+
     }
 }
 
