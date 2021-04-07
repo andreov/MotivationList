@@ -1,7 +1,6 @@
 package ru.netology.motivationlist.viewModel
 
 import android.app.Application
-import android.os.Bundle
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -25,7 +24,6 @@ private val empty = Motivation(   //data post для заполнения нов
     urlContent = "",
     urlImage = ""
 
-
 )
 
 class MotivationViewModel(application: Application) : AndroidViewModel(application) {
@@ -35,12 +33,15 @@ class MotivationViewModel(application: Application) : AndroidViewModel(applicati
         AppDb.getInstance(application).motivationDao()
     )
 
+    val config = PagedList.Config.Builder()
+        .setEnablePlaceholders(false)
+        .setPageSize(4)
+        .build()
+
     var dataPaging: LiveData<PagedList<Motivation>> = LivePagedListBuilder(
-        repository.getPaged(),3).build()
-
-
-    //var dataPaging: LiveData<PagedList<Motivation>> = repository.getPaged(application)
-    var data: LiveData<MutableList<Motivation>> = repository.getAll()
+        repository.getPaged(), config
+    )
+        .build()
 
     var edited = MutableLiveData(empty)
 
@@ -48,17 +49,24 @@ class MotivationViewModel(application: Application) : AndroidViewModel(applicati
     val mediator = MediatorLiveData<Unit>()
 
     init {
-        mediator.addSource(dataPaging, { dataName.value = it })
+        mediator.run { addSource(dataPaging, { dataName.value = it }) }
     }
 
     fun likeUp(id: Long) = repository.likeUp(id)
     fun likeDown(id: Long) = repository.likeDown(id)
     fun share(id: Long) = repository.share(id)
     fun remove(id: Long) = repository.remove(id)
-//    fun isClickName(motivation: Motivation) {
-//        mediator.removeSource(dataPaging)
-//        mediator.addSource(dataPaging, { dataName.value = repository.getName(motivation.author) })
-//    }
+    fun isClickName(motivation: Motivation) {
+
+        val liveName: LiveData<PagedList<Motivation>> = LivePagedListBuilder(
+            repository.getName(name = motivation.author), config
+        )
+            .build()
+        mediator.removeSource(dataPaging)
+        mediator.addSource(liveName) {
+            dataName.value = it
+        }
+    }
 
     fun removeFilter() {
         mediator.removeSource(dataPaging)

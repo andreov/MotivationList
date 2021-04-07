@@ -5,20 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.paging.PagedList
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ru.netology.motivationlist.R
-import ru.netology.motivationlist.activity.FeedFragment
 import ru.netology.motivationlist.databinding.CardListBinding
 import ru.netology.motivationlist.dto.Motivation
-//import ru.netology.motivationlist.viewModel.MotivationViewModel.Companion.isAuthor
-import java.net.URI
 
 interface OnInteractionListener {
     fun onLikeUp(motivation: Motivation) {}
@@ -44,8 +38,6 @@ class MotivationAdapter(
         } else {
             holder.bind(motivation)
         }
-
-
     }
 }
 

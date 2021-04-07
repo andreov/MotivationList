@@ -1,15 +1,15 @@
 package ru.netology.motivationlist.activity
 
+
+import android.content.ContentValues.TAG
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -18,9 +18,6 @@ import ru.netology.motivationlist.adapter.MotivationAdapter
 import ru.netology.motivationlist.adapter.OnInteractionListener
 import ru.netology.motivationlist.databinding.FragmentFeedBinding
 import ru.netology.motivationlist.dto.Motivation
-import ru.netology.motivationlist.entity.MotivationEntity
-
-
 import ru.netology.motivationlist.viewModel.MotivationViewModel
 
 
@@ -42,7 +39,7 @@ class FeedFragment : Fragment() {
         val adapter = MotivationAdapter(object : OnInteractionListener {
 
             override fun onFilterNameAuthor(motivation: Motivation) {
-                //viewModel.isClickName(motivation)
+                viewModel.isClickName(motivation)
 
                 Snackbar.make(
                     binding.root,
@@ -86,11 +83,13 @@ class FeedFragment : Fragment() {
 
         binding.recyclerview.adapter = adapter
 
-        //viewModel.mediator.observe(viewLifecycleOwner) {}
+        viewModel.mediator.observe(viewLifecycleOwner) {}
 
-        viewModel.dataPaging.observe(viewLifecycleOwner) {
+        viewModel.dataName.observe(viewLifecycleOwner) {
+            Log.d(TAG, "submit PagedList")
             adapter.submitList(it)
         }
+
 
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.action_feedFragment_to_newMotivationFragment)
