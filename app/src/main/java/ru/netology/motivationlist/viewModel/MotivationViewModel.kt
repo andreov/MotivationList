@@ -35,7 +35,7 @@ class MotivationViewModel(application: Application) : AndroidViewModel(applicati
 
     val config = PagedList.Config.Builder()
         .setEnablePlaceholders(false)
-        .setPageSize(4)
+        .setPageSize(20)
         .build()
 
     var dataPaging: LiveData<PagedList<Motivation>> = LivePagedListBuilder(
